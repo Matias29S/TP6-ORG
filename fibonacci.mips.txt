@@ -1,0 +1,23 @@
+li B, 0
+li C, 1
+li IR, 2
+li MDR, 14
+
+sw B, I/O
+sw C, I/O
+
+loop:
+    add	A, B, C
+    sw A, I/O
+
+    addi B, C, 0
+    addi C, A, 0
+
+    li FLAGS, 1
+    add IR, IR, FLAGS
+
+    beq IR, MDR, end
+    beq A, A, loop
+
+end:
+    syscall
